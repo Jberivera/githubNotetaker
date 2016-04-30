@@ -9,44 +9,46 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator
 } from 'react-native';
 
+import { Main } from './app/components';
+
 class githubNotetaker extends Component {
-  render() {
+  render () {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native YEY!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Navigator styles={styles.container}
+        initialRoute={{
+          name: 'Github Notetaker',
+          index: 0
+        }}
+        renderScene={(route, navigator) => (
+          <Main
+            name={route.name}
+            onForward={() => {
+              const nextIndex = route.index + 1;
+              navigator.push({
+                name: 'Scene ' + nextIndex,
+                index: nextIndex,
+              });
+            }}
+            onBack={() => {
+              if (route.index > 0) {
+                navigator.pop();
+              }
+            }}
+          />
+        )}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    backgroundColor: '#111111'
   },
 });
 
