@@ -6,11 +6,23 @@ import React, {
 } from 'react-native';
 
 class Main extends Component {
+
+  switchRout (name) {
+    switch (name) {
+      case 'hello':
+        return (<Text>Hello world</Text>);
+        break;
+      default:
+        return (<Text>Default Render</Text>);
+    }
+  }
+
   render () {
     const { name, onForward, onBack } = this.props;
     return (
       <View style={styles.mainContainer}>
         <Text>{ name }</Text>
+        { this.switchRout(name) }
       </View>
     );
   }
