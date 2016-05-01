@@ -8,6 +8,9 @@ import React, {
   StyleSheet
 } from 'react-native';
 
+import { getBio, getRepos} from '../../utils/api';
+import Dashboard from '../Dashboard/Dashboard';
+
 class Main extends Component {
 
   constructor (props) {
@@ -29,7 +32,25 @@ class Main extends Component {
     this.setState({
       isLoading: true
     });
-    console.log('SEARCH');
+    getBio(this.state.userName).then((res) => {
+      if (res.message !== 'Not Found') {
+        this.props.navigator.push({
+          title: res.name || 'Profile',
+          component: Dashboard,
+          passProps: { userInfo: res }
+        });
+        this.setState({
+          isLoading: false,
+          error: false,
+          userName: ''
+        });
+      } else {
+        this.setState({
+          error: 'User not Found',
+          isLoading: false
+        });
+      }
+    });
   }
 
   render () {
