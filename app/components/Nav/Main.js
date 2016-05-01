@@ -5,13 +5,26 @@ import React, {
   StyleSheet
 } from 'react-native';
 
+import Nav from './Nav';
+
 class Main extends Component {
+
+  switchRout (name) {
+    switch (name) {
+      case 'hello':
+        return (<Text style={styles.item}>Hello world</Text>);
+        break;
+      default:
+        return (<Text style={styles.item}>Default Render</Text>);
+    }
+  }
 
   render () {
     const { name, onForward, onBack } = this.props;
     return (
       <View style={styles.mainContainer}>
-        <Text>Testing the router</Text>
+        <Nav />
+        { this.switchRout(name) }
       </View>
     );
   }
@@ -20,10 +33,11 @@ class Main extends Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    padding: 30,
-    marginTop: 65,
     flexDirection: 'column',
-    justifyContent: 'center',
+    alignItems: 'stretch'
+  },
+  item: {
+    flex: 1,
     backgroundColor: '#48BBEC'
   },
   title: {
