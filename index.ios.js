@@ -10,7 +10,7 @@ import React, {
   StyleSheet,
   Text,
   View,
-  Navigator
+  NavigatorIOS
 } from 'react-native';
 
 import { Main } from './app/components';
@@ -18,29 +18,13 @@ import { Main } from './app/components';
 class githubNotetaker extends Component {
   render () {
     return (
-      <Navigator styles={styles.container}
-        initialRoute={{
-          name: 'Github Notetaker',
-          index: 0
-        }}
-        renderScene={(route, navigator) => (
-          <Main
-            name={route.name}
-            onForward={() => {
-              const nextIndex = route.index + 1;
-              navigator.push({
-                name: 'Scene ' + nextIndex,
-                index: nextIndex,
-              });
-            }}
-            onBack={() => {
-              if (route.index > 0) {
-                navigator.pop();
-              }
-            }}
-          />
-        )}
-      />
+      <NavigatorIOS
+      style={styles.container}
+      initialRoute={{
+        component: Main,
+        title: 'GitHub NoteTaker'
+      }}
+    />
     );
   }
 }
