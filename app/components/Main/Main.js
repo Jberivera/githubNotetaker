@@ -2,16 +2,50 @@ import React, {
   Component,
   View,
   Text,
+  TextInput,
+  TouchableHighlight,
+  ActivityIndicatorIOS,
   StyleSheet
 } from 'react-native';
 
 class Main extends Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      userName: '',
+      isLoading: false,
+      error: false
+    };
+  }
+
+  handleChange (e) {
+    this.setState({
+      userName: e.nativeEvent.text
+    });
+  }
+
+  handleSubmit (e) {
+    this.setState({
+      isLoading: true
+    });
+    console.log('SEARCH');
+  }
+
   render () {
-    const { name, onForward, onBack } = this.props;
     return (
       <View style={styles.mainContainer}>
-        <Text>Testing the router</Text>
+        <Text style={styles.title}>Search for a GitHub User</Text>
+        <TextInput
+          style={styles.searchInput}
+          value={this.state.userName}
+          onChange={this.handleChange.bind(this)} />
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.handleSubmit.bind(this)}
+          underlayColor="white">
+          <Text style={styles.buttonText}>SEARCH</Text>
+        </TouchableHighlight>
       </View>
     );
   }
