@@ -9,10 +9,15 @@ import React, {
 
 import Badge from '../Badge/Badge';
 import Separator from '../Helpers/Separator';
+import Web from '../Helpers/Web';
 
 class Repositories extends Component {
   openPage (url) {
-    console.log('the url is', url);
+    this.props.navigator.push({
+      component: Web,
+      title: 'Web View',
+      passProps: { url }
+    });
   }
 
   render () {
