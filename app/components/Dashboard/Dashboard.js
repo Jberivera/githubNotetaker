@@ -7,12 +7,14 @@ import React, {
   StyleSheet
 } from 'react-native';
 
+import Profile from '../Profile/Profile';
+
 class Dashboard extends Component {
 
   goToProfile (e) {
     this.props.navigator.push({
       title: 'Profile',
-      component: Dashboard,
+      component: Profile,
       passProps: { userInfo: this.props.userInfo }
     });
   }
