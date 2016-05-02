@@ -8,7 +8,7 @@ import React, {
   StyleSheet
 } from 'react-native';
 
-import { getBio, getRepos} from '../../utils/api';
+import { getBio } from '../../utils/api';
 import Dashboard from '../Dashboard/Dashboard';
 
 class Main extends Component {
