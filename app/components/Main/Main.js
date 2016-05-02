@@ -35,7 +35,7 @@ class Main extends Component {
     getBio(this.state.userName).then((res) => {
       if (res.message !== 'Not Found') {
         this.props.navigator.push({
-          title: res.name || 'Profile',
+          title: res.name || 'User',
           component: Dashboard,
           passProps: { userInfo: res }
         });
@@ -67,6 +67,11 @@ class Main extends Component {
           underlayColor="white">
           <Text style={styles.buttonText}>SEARCH</Text>
         </TouchableHighlight>
+        <Text>{this.state.error}</Text>
+        <ActivityIndicatorIOS
+          animating={this.state.isLoading}
+          color="#111"
+          size="large" />
       </View>
     );
   }
