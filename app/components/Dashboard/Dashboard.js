@@ -7,20 +7,30 @@ import React, {
   StyleSheet
 } from 'react-native';
 
+import { getRepos } from '../../utils/api';
+
+import Profile from '../Profile/Profile';
+import Repositories from '../Repositories/Repositories';
+
 class Dashboard extends Component {
 
   goToProfile (e) {
     this.props.navigator.push({
       title: 'Profile',
-      component: Dashboard,
+      component: Profile,
       passProps: { userInfo: this.props.userInfo }
     });
   }
   goToRepos (e) {
-    this.props.navigator.push({
-      title: 'Profile',
-      component: Dashboard,
-      passProps: { userInfo: this.props.userInfo }
+    getRepos(this.props.userInfo.login).then((res) => {
+      this.props.navigator.push({
+        title: 'Repos',
+        component: Repositories,
+        passProps: {
+          userInfo: this.props.userInfo,
+          repos: res
+        }
+      });
     });
   }
   goToNotes (e) {
