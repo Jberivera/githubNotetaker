@@ -7,10 +7,11 @@ import React, {
   StyleSheet
 } from 'react-native';
 
-import { getRepos } from '../../utils/api';
+import { getRepos, getNotes } from '../../utils/api';
 
 import Profile from '../Profile/Profile';
 import Repositories from '../Repositories/Repositories';
+import Notes from '../Notes/Notes';
 
 class Dashboard extends Component {
 
@@ -34,11 +35,18 @@ class Dashboard extends Component {
     });
   }
   goToNotes (e) {
-    this.props.navigator.push({
-      title: 'Profile',
-      component: Dashboard,
-      passProps: { userInfo: this.props.userInfo }
-    });
+    getNotes(this.props.userInfo.login)
+      .then((res) => {
+        res = res || {};
+        this.props.navigator.push({
+          title: 'Notes',
+          component: Notes,
+          passProps: {
+            notes: res,
+            userInfo: this.props.userInfo
+          }
+        });
+      });
   }
 
   render () {
